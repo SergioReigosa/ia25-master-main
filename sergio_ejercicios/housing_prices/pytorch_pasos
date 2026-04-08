@@ -1,0 +1,38 @@
+✅ 1. Todo debe ser numérico
+
+✔ Ya lo tienes
+
+nada de texto
+nada de categorías
+✅ 2. Sin valores nulos
+
+✔ Ya lo tienes
+
+hiciste imputación
+✅ 3. Datos escalados
+
+👉 MUY importante en redes neuronales
+
+✔ debes tener:
+
+X_train_scaled
+X_val_scaled
+X_test_scaled
+✅ 4. Separación X / y
+
+✔ ya lo tienes:
+
+X → variables
+y → target
+✅ 5. Formato correcto
+
+Aquí empieza PyTorch de verdad:
+
+👉 PyTorch NO usa:
+
+DataFrames
+listas
+
+👉 usa:
+
+tensores

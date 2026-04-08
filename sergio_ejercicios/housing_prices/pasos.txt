@@ -1,0 +1,150 @@
+Paso 1. Separar entrada y salida
+
+Tienes que dejar claro:
+
+X = todas las variables predictoras
+y = median_house_value
+
+Aquí la idea es que la red reciba todas las columnas menos la objetivo, y aprenda a predecir esa columna.
+
+Paso 2. Revisar si hay valores faltantes
+
+Antes de entrenar, comprueba si hay NaN en alguna columna.
+
+Porque si hay nulos:
+
+PyTorch no te va a entrenar bien
+primero tendrás que eliminarlos o imputarlos
+
+Lo normal en este dataset es mirar especialmente si alguna columna como total_bedrooms tiene nulos.
+
+Paso 3. Revisar si tienes variables categóricas
+
+Mira si todas tus columnas son numéricas o si hay alguna de texto, por ejemplo ocean_proximity.
+
+Si tienes una categórica:
+
+no puedes meterla directamente en la red
+antes hay que convertirla a numérica, normalmente con one-hot encoding
+
+Si todas son numéricas, este paso te lo saltas.
+
+Paso 4. Separar en train y test
+
+Antes de entrenar, divide tus datos en:
+
+conjunto de entrenamiento
+conjunto de prueba
+
+Muy típico:
+
+80% train
+20% test
+
+Esto es importante porque la red debe aprender con una parte y luego evaluarse con datos no vistos.
+
+Paso 5. Escalar las variables de entrada
+
+Este paso en redes neuronales es muy importante.
+
+Tus variables tienen escalas muy distintas:
+
+población
+ingresos
+habitaciones
+etc.
+
+Si no escalas, la red suele aprender peor.
+
+Lo habitual es:
+
+ajustar el escalador con X_train
+transformar X_train
+transformar X_test con el mismo escalador
+
+Nunca ajustes el escalador con todo el dataset, porque estarías metiendo información del test.
+
+Paso 6. Convertir los datos a tensores
+
+PyTorch trabaja con tensores, no con dataframes ni arrays normales en el entrenamiento.
+
+Así que después de escalar:
+
+conviertes X_train, X_test a tensores float32
+conviertes y_train, y_test también a float32
+
+Además, la salida suele ir con forma:
+
+(n_samples, 1)
+
+No simplemente (n_samples,)
+
+Paso 7. Crear la red neuronal
+
+Luego defines una red simple para regresión.
+
+Aquí debes pensar en:
+
+número de entradas = número de columnas de X
+una o dos capas ocultas
+una sola neurona de salida
+
+Como quieres predecir un valor numérico continuo:
+
+la última capa debe tener 1 neurona
+no uses softmax ni sigmoide al final
+Paso 8. Elegir función de pérdida y optimizador
+
+Como esto es regresión:
+
+una opción típica es MSELoss
+
+Y para optimizar:
+
+Adam suele ir muy bien para empezar
+Paso 9. Entrenar la red
+
+Aquí haces el bucle de entrenamiento por épocas.
+
+En cada época:
+
+haces predicción con X_train
+calculas la pérdida
+haces backpropagation
+actualizas pesos
+
+Y conviene ir mostrando la pérdida cada cierto número de épocas para ver si baja.
+
+Paso 10. Evaluar con test
+
+Cuando termine el entrenamiento:
+
+usas X_test
+obtienes predicciones
+comparas con y_test
+
+Para regresión, lo típico es calcular:
+
+MAE
+MSE
+RMSE
+Paso 11. Interpretar resultados
+
+Después comparas esa red neuronal con el modelo de ML que ya hiciste.
+
+Por ejemplo:
+
+si mejora MAE o RMSE
+si empeora
+si parece sobreajustar
+Paso 12. Mejorar si hace falta
+
+Si la red funciona pero no muy bien, luego podrías tocar:
+
+número de capas
+número de neuronas
+learning rate
+épocas
+batch size
+
+Pero primero haz la versión básica.
