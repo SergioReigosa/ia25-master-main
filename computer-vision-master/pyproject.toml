@@ -1,0 +1,19 @@
+[project]
+name = "computer-vision"
+version = "0.1.0"
+description = "Tools and notebooks for computer vision learning"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "chromadb",
+    "ipykernel",
+    "matplotlib",
+    "numpy",
+    "opencv-python",
+    "pillow",
+    "pyyaml",
+    "scikit-learn",
+    "sentence-transformers",
+    "torch",
+    "ultralytics",
+]

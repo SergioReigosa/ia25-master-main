@@ -1,0 +1,9 @@
+artifacts/
+resources/models/
+
+# PyTorch model files
+*.pt
+*.pth
+
+*.mp4
+*.mov
